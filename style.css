@@ -1,12 +1,12 @@
-message-input-areaImune" - Dark + Neon Roxo ===== */
+/* ===== Tema: "Imune" - Dark + Neon Roxo (Versão A - 100dvh) ===== */
 :root {
   --bg: #050506;
   --panel: #0b0b0c;
   --muted: #9aa0a6;
   --text: #f3f4f5;
   --accent: #ffffff;
-  --primary: #8b5cf6;        /* cor principal (roxão) */
-  --neon: #c13bff;           /* neon mais vibrante */
+  --primary: #8b5cf6;
+  --neon: #c13bff;
   --neon-weak: rgba(193,59,255,0.14);
   --glass: rgba(255, 255, 255, 0.04);
   --radius: 16px;
@@ -31,7 +31,7 @@ message-input-areaImune" - Dark + Neon Roxo ===== */
 
 /* Reset & Globais */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html,body { height: 100%; scroll-behavior: smooth; }
+html, body { height: 100%; scroll-behavior: smooth; }
 body {
   font-family: var(--ui);
   background: var(--bg);
@@ -39,7 +39,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-   overflow-x: hidden;
+  overflow-x: hidden;
   overflow-y: auto;
   min-height: 100vh;
   display: flex;
@@ -62,11 +62,12 @@ body::before {
 .chat-container {
   width: 92%;
   max-width: 880px;
-  height: 94vh;
+  /* Versão A: usar viewport dinâmica pra evitar cortes no mobile */
+  height: 100dvh;
   max-height: 920px;
   display: flex;
   flex-direction: column;
-  background-color: transparent; /* painel agora semi-transparente com borda glow */
+  background-color: transparent;
   border-radius: var(--radius);
   box-shadow: var(--shadow-elevated);
   border: 1px solid rgba(255,255,255,0.04);
@@ -74,7 +75,7 @@ body::before {
   position: relative;
 }
 
-/* Painel interno com glass */
+/* Painel interno com glass (se não usar no HTML, ok manter) */
 .chat-panel {
   position: absolute;
   inset: 0;
@@ -104,6 +105,7 @@ body::before {
   border: 2px solid transparent;
   background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
   box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 12px var(--neon-weak);
+  position: relative;
 }
 .chat-header-avatar::after {
   content: '';
@@ -124,9 +126,7 @@ body::before {
 .chat-header-info p { font-size: 12px; color: var(--muted); }
 
 /* stories/top circles */
-.header-stories {
-  display:flex; gap:12px; align-items:center; margin-left: 12px;
-}
+.header-stories { display:flex; gap:12px; align-items:center; margin-left: 12px; }
 .story {
   width:62px; height:62px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
@@ -142,6 +142,7 @@ body::before {
   position: relative;
   flex-grow: 1;
   padding: 20px;
+  padding-bottom: 140px; /* garante espaço pra input fixo sem esconder a última mensagem */
   overflow-y: auto;
   background-image: url('https://files.catbox.moe/2ibz4c.jpg');
   background-size: cover;
@@ -172,6 +173,7 @@ body::before {
   box-shadow: 0 6px 20px rgba(0,0,0,0.6);
   transition: transform var(--transition), box-shadow var(--transition);
   word-break: break-word;
+  background-clip: padding-box;
 }
 
 /* BOLHA DO USUÁRIO (direita) */
@@ -182,7 +184,7 @@ body::before {
 .message.user .message-content {
   background: var(--bubble-user);
   color: #fff;
-  border-radius: 18px 6px 18px 18px; /* cantos diferentes semelhantes ao da imagem */
+  border-radius: 18px 6px 18px 18px;
   box-shadow: 0 10px 30px rgba(139,92,246,0.14), 0 2px 8px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.04);
   transform-origin: right center;
@@ -202,18 +204,22 @@ body::before {
   box-shadow: none;
 }
 
-/* BOLHA DO BOT (esquerda) com efeito glass/blur */
+/* BOLHA DO BOT (esquerda) com efeito glass/blur - FORÇADA ESCURA */
 .message.bot {
   align-self: flex-start;
   justify-content: flex-start;
 }
 .message.bot .message-content {
-  background: var(--bubble-bot);
-  color: var(--text);
+  /* gradiente escuro + translúcido com fallback e prioridade */
+  background: linear-gradient(180deg, rgba(12,12,13,0.78), rgba(16,16,17,0.56)) !important;
+  background-color: rgba(16,16,17,0.6) !important;
+  color: var(--text) !important;
   border-radius: 6px 18px 18px 18px;
-  border: 1px solid rgba(255,255,255,0.03);
-  backdrop-filter: blur(6px) saturate(110%);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03) !important;
+  backdrop-filter: blur(6px) saturate(110%) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(110%) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.6) !important;
+  inset: 0;
 }
 
 /* cauda esquerda */
@@ -223,7 +229,7 @@ body::before {
   left: -6px; bottom: 10px;
   width: 14px; height: 14px;
   transform: rotate(45deg);
-  background: inherit;
+  background: inherit !important;
   border-bottom-right-radius: 2px;
 }
 
@@ -264,36 +270,64 @@ body::before {
   box-shadow: 0 10px 30px rgba(193,59,255,0.08);
   background: var(--gradient-hover);
 }
+
+/* ----- ÁREA DE INPUT (fixa embaixo com sticky) ----- */
 .message-input-area {
-    position: sticky;
-    bottom: 0;
-    z-index: 999;
+  background: linear-gradient(180deg, rgba(11,11,12,0.75), rgba(8,8,9,0.6));
+  padding: 12px 14px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  position: sticky;
+  bottom: 0;
+  z-index: 999;
+  backdrop-filter: blur(6px);
 }
 
-/* Input text */
+/* Input text (maior e responsivo) */
 .message-input-area input[type="text"] {
-  flex-grow: 1;
-  padding: 12px 16px;
+  flex: 1 1 auto;
+  padding: 14px 18px;
+  min-height: 48px;
+  height: 48px;
+  font-size: 16px;
   border-radius: 999px;
   border: 1px solid var(--input-border);
   background-color: var(--input-bg);
   color: var(--text);
-  font-size: 15px;
   outline: none;
   transition: box-shadow var(--transition), border-color var(--transition);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  -webkit-appearance: none;
 }
+
+/* focus */
 .message-input-area input[type="text"]:focus {
   border-color: var(--neon);
   box-shadow: 0 6px 30px rgba(193,59,255,0.06);
 }
 
-/* Botão enviar padrão escondido (mantemos para acessibilidade) */
-.message-input-area button.send-hidden {
-  display: none;
-}
+/* Botão enviar padrão escondido (se tiver) */
+.message-input-area button.send-hidden { display: none; }
 
-/* Floating Action Button (estilo Imune) - microfone / enviar */
+/* Botão enviar - fixo e não estrangula o input */
+.message-input-area > button {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--neon), var(--primary));
+  border: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+}
+.message-input-area > button .material-icons { font-size: 20px; color: #fff; }
+
+/* Floating Action Button (estilo Imune) - microfone / enviar (caso use) */
 .fab-send {
   position: absolute;
   right: 22px;
@@ -338,11 +372,22 @@ body::before {
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 @keyframes slideIn { from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:translateY(0)} }
 
+/* Forçar herança correta nas caudas (evita artefatos brancos) */
+.message.bot .message-content::after,
+.message.user .message-content::after {
+  background: inherit !important;
+  box-shadow: none !important;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .chat-container { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; }
   .message { max-width: 86%; }
   .fab-send { right: 14px; bottom: 16px; width:52px; height:52px; }
+  .chat-messages { padding: 18px; padding-bottom: 160px; } /* mais espaço no mobile */
+  .message-input-area { padding: 10px 12px; }
+  .message-input-area input[type="text"] { min-height: 46px; height: 46px; font-size: 15px; padding: 12px 14px; }
+  .message-input-area > button { width: 44px; height: 44px; min-width: 44px; }
 }
 
 /* Pequenos ajustes estéticos opcionais */
