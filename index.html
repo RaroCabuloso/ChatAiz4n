@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[🥷/Online Chat Bot]</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones do Google, para o botão de envio -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Fontes do Exemplo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Cabeçalho do Chat -->
+        <div class="chat-header">
+            <!-- Foto de Perfil do Bot -->
+            <img src="https://files.catbox.moe/o8j2vm.jpg" alt="Avatar do Bot" class="chat-header-avatar">
+            <div class="chat-header-info">
+                <h2>Aiz3n ¿ Web</h2>
+                <p>Online</p>
+            </div>
+        </div>
+
+        <!-- Área de Mensagens -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Mensagem de boas-vindas do Bot -->
+            <div class="message bot">
+                <div class="message-content">
+                    <span class="welcome-message">Olá! Eu sou o seu Bot de Comandos.</span>
+                    <p>Digite <span class="command-text">/menu</span> para ver a lista de comandos disponíveis.</p>
+                    <span class="message-time">10:00</span>
+                </div>
+            </div>
+            
+            <!-- Exemplo de mensagem do usuário (Removido para iniciar o chat limpo, mas mantido o estilo) -->
+            <!-- <div class="message user">
+                <div class="message-content">
+                    <p>/menu</p>
+                    <span class="message-time">10:01</span>
+                </div>
+            </div> -->
+            
+            <!-- O conteúdo será gerado dinamicamente pelo JS -->
+        </div>
+
+        <!-- Área de Input -->
+        <div class="message-input-area">
+            <input type="text" id="messageInput" placeholder="Make By Im.Raro" onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="material-icons">send</i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
